@@ -383,10 +383,14 @@
 
 <script>
     (function() {
+        // قائمة موسعة من الـ Proxies لحل مشكلة CORS
         const PROXIES = [
             "https://api.allorigins.win/raw?url=",
             "https://corsproxy.io/?",
-            "https://api.codetabs.com/v1/proxy?quest="
+            "https://api.codetabs.com/v1/proxy?quest=",
+            "https://cors-anywhere.herokuapp.com/",
+            "https://proxy.cors.sh/",
+            "https://thingproxy.freeboard.io/fetch/"
         ];
         
         let allTweaks = [];
@@ -422,26 +426,43 @@
                 for (let proxyIndex = 0; proxyIndex < PROXIES.length; proxyIndex++) {
                     try {
                         const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 15000);
-                        const proxyUrl = PROXIES[proxyIndex] + encodeURIComponent(url);
-                        const response = await fetch(proxyUrl, { 
+                        const timeoutId = setTimeout(() => controller.abort(), 20000);
+                        let finalUrl = url;
+                        
+                        // استخدام proxy فقط إذا كان الرابط ليس بالفعل proxy
+                        if (!url.startsWith('blob:') && PROXIES[proxyIndex]) {
+                            finalUrl = PROXIES[proxyIndex] + encodeURIComponent(url);
+                        }
+                        
+                        const response = await fetch(finalUrl, { 
                             signal: controller.signal,
-                            headers: { 'User-Agent': 'Mozilla/5.0' }
+                            headers: { 
+                                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
+                                'Accept': 'text/plain, application/octet-stream, */*'
+                            }
                         });
                         clearTimeout(timeoutId);
                         if (response.ok) {
-                            return await response.text();
+                            const text = await response.text();
+                            if (text && text.length > 0) {
+                                return text;
+                            }
                         }
-                    } catch(e) { continue; }
+                    } catch(e) {
+                        console.log(`Proxy ${proxyIndex} failed:`, e.message);
+                        continue;
+                    }
                 }
-                if (retry < maxRetries - 1) await new Promise(r => setTimeout(r, 1000));
+                if (retry < maxRetries - 1) {
+                    await new Promise(r => setTimeout(r, 2000));
+                }
             }
             return null;
         }
 
         // كشف نوع الحزمة (ARM64, ARM64e, rootful, rootless, roothide)
-        function detectPackageType(packageName, description, filename, version, architectureField) {
-            const text = (packageName + " " + description + " " + filename + " " + version).toLowerCase();
+        function detectPackageType(packageName, description, filename, version, architectureField, dependsField) {
+            const text = (packageName + " " + description + " " + filename + " " + version + " " + architectureField + " " + dependsField).toLowerCase();
             const types = [];
             
             // كشف نوع المعالج
@@ -465,7 +486,6 @@
             } else if (text.includes('rootful') || text.includes('root-full') || text.includes('root full')) {
                 types.push('rootful');
             } else {
-                // إذا لم يتم العثور على نوع محدد، نعتبرها rootful كافتراضي
                 types.push('rootful');
             }
             
@@ -473,35 +493,95 @@
         }
 
         async function fetchPackagesContent(repoBase) {
+            // قائمة موسعة من المسارات المحتملة لملف Packages
             const paths = [
-                "/Packages", "/Packages.gz", "./Packages", "Packages",
+                "/Packages",
+                "/Packages.gz", 
+                "./Packages", 
+                "Packages",
+                "/Packages.bz2",
                 "/dists/stable/main/binary-iphoneos-arm/Packages",
                 "/dists/stable/main/binary-iphoneos-arm/Packages.gz",
+                "/dists/stable/main/binary-iphoneos-arm/Packages.bz2",
                 "/dists/main/binary-iphoneos-arm/Packages",
-                "/dists/main/binary-iphoneos-arm/Packages.gz"
+                "/dists/main/binary-iphoneos-arm/Packages.gz",
+                "/dists/stable/main/binary-iphoneos-arm64/Packages",
+                "/dists/stable/main/binary-iphoneos-arm64/Packages.gz",
+                "./dists/stable/main/binary-iphoneos-arm/Packages",
+                "./dists/stable/main/binary-iphoneos-arm/Packages.gz",
+                "/./Packages",
+                "/./Packages.gz"
             ];
+            
+            let lastError = null;
             
             for (let path of paths) {
                 try {
                     const url = repoBase + path;
+                    console.log(`محاولة جلب: ${url}`);
                     let content = await fetchWithRetry(url);
-                    if (!content || content.length < 100) continue;
                     
+                    if (!content || content.length < 100) {
+                        console.log(`المحتوى قصير جداً أو فارغ من: ${path}`);
+                        continue;
+                    }
+                    
+                    // معالجة الملفات المضغوطة
                     if (path.endsWith('.gz')) {
                         try {
+                            // محاولة فك الضغط
                             const binaryString = atob(content);
                             const bytes = new Uint8Array(binaryString.length);
-                            for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
+                            for (let i = 0; i < binaryString.length; i++) {
+                                bytes[i] = binaryString.charCodeAt(i);
+                            }
                             content = pako.inflate(bytes, { to: 'string' });
-                        } catch(e) { continue; }
+                            console.log(`تم فك ضغط ${path} بنجاح`);
+                        } catch(e) {
+                            console.log(`فشل فك ضغط ${path}:`, e);
+                            continue;
+                        }
+                    } else if (path.endsWith('.bz2')) {
+                        // BZ2 ليس مدعوماً مباشرة، نتجاوزه
+                        console.log(`تخطي BZ2: ${path}`);
+                        continue;
                     }
                     
-                    if (content && content.includes("Package:") && content.includes("Filename:")) {
+                    // التحقق من صحة المحتوى
+                    if (content && content.includes("Package:") && (content.includes("Filename:") || content.includes("Filename:"))) {
+                        console.log(`تم العثور على Packages صالح في: ${path}`);
                         return content;
+                    } else {
+                        console.log(`المحتوى من ${path} لا يحتوي على Package: و Filename: بشكل صحيح`);
                     }
-                } catch(e) { continue; }
+                } catch(e) {
+                    console.log(`خطأ في المسار ${path}:`, e);
+                    lastError = e;
+                    continue;
+                }
             }
-            return null;
+            
+            // محاولة أخيرة: البحث عن أي ملف Packages في أي مكان
+            try {
+                const possibleUrls = [
+                    repoBase + "/Packages",
+                    repoBase + "/Packages.gz",
+                    repoBase.replace(/\/$/, "") + "/Packages",
+                    repoBase + "/./Packages"
+                ];
+                
+                for (let url of possibleUrls) {
+                    try {
+                        const content = await fetchWithRetry(url);
+                        if (content && content.length > 500 && content.includes("Package:")) {
+                            console.log(`تم العثور على Packages في المحاولة الأخيرة: ${url}`);
+                            return content;
+                        }
+                    } catch(e) {}
+                }
+            } catch(e) {}
+            
+            throw new Error(`لم يتم العثور على ملف Packages في المستودع: ${repoBase}\nتأكد من صحة الرابط وأن المستودع يدعم CORS`);
         }
 
         function safeGetField(block, fieldName) {
@@ -512,10 +592,20 @@
 
         function parsePackages(content, repoBase) {
             const tweaksMap = new Map();
-            const blocks = content.split(/\n(?=Package:)/);
+            
+            // تقسيم المحتوى إلى كتل
+            let blocks = [];
+            if (content.includes('\n\n')) {
+                blocks = content.split(/\n\s*\n/);
+            } else {
+                blocks = content.split(/\n(?=Package:)/);
+            }
+            
+            console.log(`تم العثور على ${blocks.length} كتلة للمعالجة`);
             
             for (let block of blocks) {
-                if (!block || !block.trim() || !block.includes("Package:")) continue;
+                if (!block || !block.trim()) continue;
+                if (!block.includes("Package:")) continue;
                 
                 try {
                     const packageName = safeGetField(block, "Package");
@@ -524,13 +614,20 @@
                     const author = safeGetField(block, "Author") || safeGetField(block, "Maintainer") || "مطور المستودع";
                     let filename = safeGetField(block, "Filename");
                     const architecture = safeGetField(block, "Architecture") || "";
+                    const depends = safeGetField(block, "Depends") || "";
                     
-                    if (!packageName || !filename) continue;
+                    if (!packageName) continue;
+                    if (!filename) {
+                        console.log(`الحزمة ${packageName} ليس لديها Filename، يتم تخطيها`);
+                        continue;
+                    }
                     
                     // كشف جميع أنواع الحزمة
-                    const packageTypes = detectPackageType(packageName, description, filename, version, architecture);
+                    const packageTypes = detectPackageType(packageName, description, filename, version, architecture, depends);
                     
-                    if (description.length > 200) description = description.substring(0, 197) + "...";
+                    if (description && description.length > 200) {
+                        description = description.substring(0, 197) + "...";
+                    }
                     
                     let downloadUrl = "";
                     if (filename.startsWith("http://") || filename.startsWith("https://")) {
@@ -539,6 +636,7 @@
                         let base = repoBase;
                         if (!base.endsWith("/")) base += "/";
                         if (filename.startsWith("./")) filename = filename.substring(2);
+                        if (filename.startsWith("/")) filename = filename.substring(1);
                         downloadUrl = base + filename;
                     }
                     
@@ -548,7 +646,7 @@
                             id: packageName + "_" + version,
                             name: packageName,
                             version: version,
-                            description: description,
+                            description: description || "لا يوجد وصف",
                             author: author,
                             downloadUrl: downloadUrl,
                             filename: filename.split('/').pop() || filename,
@@ -556,17 +654,22 @@
                             architecture: architecture
                         });
                     }
-                } catch(e) { continue; }
+                } catch(e) {
+                    console.log("خطأ في معالجة كتلة:", e);
+                    continue;
+                }
             }
             
-            return Array.from(tweaksMap.values());
+            const result = Array.from(tweaksMap.values());
+            console.log(`تم استخراج ${result.length} حزمة بنجاح`);
+            return result;
         }
 
         function updateUI() {
-            filteredTweaks = allTweaks.slice(); // عرض جميع الحزم بدون فلتر
+            filteredTweaks = allTweaks.slice();
             
             if (filteredTweaks.length === 0) {
-                tweaksGrid.innerHTML = `<div class="no-results"><i class="fas fa-box-open" style="font-size: 3rem;"></i><h3>⚠️ لا توجد حزم DEB</h3><p>لم يتم العثور على حزم في هذا المستودع</p></div>`;
+                tweaksGrid.innerHTML = `<div class="no-results"><i class="fas fa-box-open" style="font-size: 3rem;"></i><h3>⚠️ لا توجد حزم DEB</h3><p>لم يتم العثور على حزم في هذا المستودع</p><p style="margin-top: 0.5rem;">💡 تأكد من أن المستودع يحتوي على حزم .deb</p></div>`;
                 statsDiv.style.display = "flex";
                 countDisplay.innerHTML = `0 حزمة`;
                 typeDisplay.innerHTML = `لا توجد حزم`;
@@ -578,7 +681,6 @@
             bulkActions.style.display = "flex";
             countDisplay.innerHTML = `${filteredTweaks.length} حزمة`;
             
-            // إحصائيات الأنواع
             const typeStats = { ARM64: 0, ARM64e: 0, rootful: 0, rootless: 0, roothide: 0 };
             filteredTweaks.forEach(tweak => {
                 tweak.types.forEach(type => {
@@ -597,7 +699,6 @@
                 const card = document.createElement('div');
                 card.className = 'tweak-card';
                 
-                // إنشاء شارات الأنواع
                 let badgesHtml = '<div class="type-badges">';
                 tweak.types.forEach(type => {
                     let badgeClass = '';
@@ -709,7 +810,9 @@
                     const proxyUrl = PROXIES[proxyIndex] + encodeURIComponent(url);
                     const response = await fetch(proxyUrl, { 
                         signal: controller.signal,
-                        headers: { 'User-Agent': 'Mozilla/5.0' }
+                        headers: { 
+                            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1'
+                        }
                     });
                     clearTimeout(timeoutId);
                     if (response.ok) {
@@ -823,7 +926,8 @@
                 detailedProgress.innerHTML = `✅ ${completed}/${selected.length} | 🔄 ${activeDownloads} جاري`;
                 const elapsed = (Date.now() - startTime) / 1000;
                 if (elapsed > 0) {
-                    speedInfo.innerHTML = `⚡ ${Math.round((completed / elapsed) * 10)}/ثانية`;
+                    const speed = Math.round((completed / elapsed) * 10);
+                    speedInfo.innerHTML = `⚡ ${speed}/ثانية - ${Math.round(speed * 0.1)}KB/s`;
                 }
             }
             
@@ -899,13 +1003,15 @@
             
             fetchBtn.disabled = true;
             fetchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري الجلب...';
-            tweaksGrid.innerHTML = `<div class="loading"><div class="spinner"></div><h3>🔍 جلب جميع حزم DEB...</h3><p>جاري البحث عن ملف Packages</p><p style="margin-top: 0.5rem; font-size: 0.8rem;">📦 يدعم: ARM64, ARM64e, rootful, rootless, roothide</p></div>`;
+            tweaksGrid.innerHTML = `<div class="loading"><div class="spinner"></div><h3>🔍 جلب جميع حزم DEB...</h3><p>جاري البحث عن ملف Packages في المستودع</p><p style="margin-top: 0.5rem; font-size: 0.8rem;">⏳ يتم تجربة عدة مسارات...</p></div>`;
             statsDiv.style.display = 'none';
             bulkActions.style.display = 'none';
             
             try {
                 const packagesContent = await fetchPackagesContent(repoUrl);
-                if (!packagesContent) throw new Error('لم يتم العثور على ملف Packages');
+                if (!packagesContent || packagesContent.length < 100) {
+                    throw new Error('لم يتم العثور على محتوى صالح لملف Packages');
+                }
                 
                 allTweaks = parsePackages(packagesContent, repoUrl);
                 
@@ -924,8 +1030,12 @@
                         <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e53e3e;"></i>
                         <h3>❌ حدث خطأ أثناء الجلب</h3>
                         <p>${escapeHtml(error.message)}</p>
-                        <p style="margin-top: 1rem;">💡 تأكد من صحة رابط المستودع</p>
-                        <p style="margin-top: 0.5rem;">💡 مثال: https://apt.procurs.us</p>
+                        <p style="margin-top: 1rem;">💡 نصائح للحل:</p>
+                        <ul style="text-align: right; margin-top: 0.5rem;">
+                            <li>تأكد من صحة رابط المستودع (مثال: https://apt.procurs.us)</li>
+                            <li>تأكد من أن المستودع يدعم CORS أو استخدم رابط مختلف</li>
+                            <li>جرب مستودع آخر للتأكد من أن المشكلة ليست من المستودع</li>
+                        </ul>
                     </div>
                 `;
                 showToast(error.message, true);
