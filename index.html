@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>مستودع التوايكات | جلب جميع DEBs</title>
+    <title>.👻 𝙱𝙴𝙺𝙴𝚂 | بيكاس :</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
@@ -11,7 +11,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             font-family: 'Cairo', sans-serif;
             min-height: 100vh;
             padding: 1rem;
@@ -19,21 +19,21 @@
         .container { max-width: 1400px; margin: 0 auto; width: 100%; }
         .hero {
             text-align: center;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.96);
             padding: 2rem 1.5rem;
-            border-radius: 1.5rem;
+            border-radius: 2rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         .hero h1 {
             font-size: clamp(1.5rem, 5vw, 2.5rem);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f2027, #2c5364);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 0.5rem;
         }
-        .hero p { font-size: clamp(0.85rem, 4vw, 1rem); color: #4a5568; }
+        .hero p { font-size: clamp(0.85rem, 4vw, 1rem); color: #2d3748; }
         .repo-card {
             background: white;
             border-radius: 1.5rem;
@@ -59,11 +59,11 @@
         }
         .repo-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+            border-color: #2c5364;
+            box-shadow: 0 0 0 3px rgba(44,83,100,0.2);
         }
         .fetch-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f2027, #2c5364);
             color: white;
             border: none;
             padding: 0 2rem;
@@ -78,7 +78,7 @@
             justify-content: center;
             gap: 0.5rem;
         }
-        .fetch-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102,126,234,0.4); }
+        .fetch-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .fetch-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         
         .bulk-actions {
@@ -113,10 +113,10 @@
         }
         .select-all-btn { background: #4299e1; color: white; }
         .download-all-btn { background: #48bb78; color: white; }
-        .select-all-btn:hover, .download-all-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 12px rgba(0,0,0,0.15); }
+        .select-all-btn:hover, .download-all-btn:hover { transform: translateY(-2px); filter: brightness(1.05);}
         .download-all-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .selected-count {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f2027, #2c5364);
             color: white;
             padding: 0.4rem 1rem;
             border-radius: 2rem;
@@ -139,7 +139,7 @@
         }
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #48bb78, #38a169);
+            background: linear-gradient(90deg, #2c5364, #1a4a5f);
             width: 0%;
             transition: width 0.2s ease;
             display: flex;
@@ -183,12 +183,12 @@
             display: flex;
             flex-direction: column;
         }
-        .tweak-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .tweak-card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px rgba(0,0,0,0.2); }
         .checkbox-wrapper { position: absolute; top: 1rem; right: 1rem; z-index: 10; }
-        .tweak-checkbox { width: 22px; height: 22px; cursor: pointer; accent-color: #48bb78; }
+        .tweak-checkbox { width: 22px; height: 22px; cursor: pointer; accent-color: #2c5364; }
         .card-header {
             padding: 1.5rem;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f0f4f8, #dfe6ed);
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -203,13 +203,13 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            color: #667eea;
+            color: #2c5364;
             flex-shrink: 0;
         }
         .card-header-info { flex: 1; min-width: 0; }
         .tweak-title { font-size: 1rem; font-weight: 800; color: #1a202c; word-break: break-word; line-height: 1.3; }
         .tweak-version {
-            background: #48bb78;
+            background: #2c5364;
             color: white;
             padding: 0.2rem 0.7rem;
             border-radius: 1rem;
@@ -250,7 +250,7 @@
             flex-wrap: wrap;
         }
         .download-single-btn {
-            background: #4299e1;
+            background: #2c5364;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
@@ -262,13 +262,14 @@
             gap: 0.5rem;
             transition: all 0.3s;
         }
-        .download-single-btn:hover { background: #3182ce; transform: scale(0.98); }
+        .download-single-btn:hover { background: #1a3f4e; transform: scale(0.98); }
         .file-badge {
             background: #edf2f7;
             padding: 0.3rem 0.7rem;
             border-radius: 2rem;
             font-size: 0.7rem;
-            color: #4a5568;
+            color: #2c5364;
+            font-weight: bold;
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
@@ -284,7 +285,7 @@
             width: 50px;
             height: 50px;
             border: 5px solid #e2e8f0;
-            border-top: 5px solid #667eea;
+            border-top: 5px solid #2c5364;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 1rem;
@@ -310,7 +311,30 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         @keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .footer { margin-top: 2rem; text-align: center; padding: 1rem; color: rgba(255,255,255,0.8); font-size: 0.8rem; }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.75);
+            border-radius: 1.5rem;
+            color: #f0f0f0;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        .footer a {
+            color: #ffd966;
+            text-decoration: none;
+            margin: 0 0.4rem;
+            transition: 0.2s;
+        }
+        .footer a:hover { text-decoration: underline; color: #ffb347; }
+        .social-icons i {
+            font-size: 1.3rem;
+            margin: 0 0.5rem;
+            transition: 0.2s;
+        }
+        .social-icons a { color: white; }
+        .social-icons a:hover i { transform: scale(1.1); color: #ffd966; }
         @media (max-width: 768px) {
             body { padding: 0.8rem; }
             .hero { padding: 1.2rem; }
@@ -321,31 +345,23 @@
             .actions-group { justify-content: center; }
             .progress-container { width: 100%; }
             .stats { flex-direction: column; text-align: center; }
-            .stats-left, .stats-right { justify-content: center; }
             .tweaks-grid { grid-template-columns: 1fr; gap: 1rem; }
             .card-header { padding: 1rem; padding-right: 2.5rem; }
             .icon-bg { width: 45px; height: 45px; font-size: 1.4rem; }
-            .tweak-title { font-size: 0.9rem; }
-            .card-body, .card-footer { padding: 0.8rem 1rem; }
-            .toast { bottom: 10px; left: 10px; right: 10px; max-width: calc(100% - 20px); }
         }
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="hero">
-        <h1><i class="fas fa-database"></i> مستودع التوايكات - جلب جميع DEBs</h1>
-        <p>جلب جميع الحزم: ARM64 | ARM64e | rootful | rootless | roothide | جميع أنواع DEBs</p>
+        <h1><i class="fas fa-bolt"></i> موقع لتحميل جميع الادوات الى في السورس دفعه وحده</h1>
+        <p>يدعم : rootful, rootless, roothide <strong style="color:#2c5364;"> </strong></p>
     </div>
 
     <div class="repo-card">
         <div class="input-group">
             <input type="text" id="repoUrl" class="repo-input" placeholder="مثال: https://apt.procurs.us" value="https://apt.procurs.us">
-            <button id="fetchBtn" class="fetch-btn"><i class="fas fa-download"></i> جلب جميع DEBs</button>
+            <button id="fetchBtn" class="fetch-btn"><i class="fas fa-rocket"></i> جلب جميع الادوات</button>
         </div>
     </div>
 
@@ -357,7 +373,7 @@
         </div>
         <div id="progressContainer" class="progress-container" style="display: none;">
             <div class="progress-bar-wrapper"><div id="progressBar" class="progress-bar">0%</div></div>
-            <div id="speedInfo" class="speed-info">جاري التحميل...</div>
+            <div id="speedInfo" class="speed-info">جاهز للتحميل...</div>
             <div id="detailedProgress" class="detailed-progress"></div>
         </div>
     </div>
@@ -370,31 +386,39 @@
     <div id="tweaksGrid" class="tweaks-grid">
         <div class="loading">
             <div class="spinner"></div>
-            <h3>✨ انتظر إدخال رابط المستودع</h3>
-            <p>أدخل رابط مستودع Cydia/APT حقيقي لجلب جميع ملفات DEB</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem;">📦 يدعم: ARM64, ARM64e, rootful, rootless, roothide</p>
+            <h3>⚡ انتظر إدخال رابط المستودع</h3>
+            <p>أدخل رابط مستودع APT حقيقي -  مع دعم تنسيقات DEB المختلفة</p>
+            <p style="margin-top: 0.5rem; color: #2c5364;"> </p>
         </div>
     </div>
     
     <div class="footer">
-        <i class="fas fa-package"></i> جلب جميع DEBs | ARM64 | ARM64e | rootful | rootless | roothide | تحميل دفعة واحدة
+        <div style="margin-bottom: 0.8rem;">
+            <i class="fas fa-code-branch"></i> جميع الحقوق محفوظة © 2025 | 
+            <strong>مبرمج ومطور المنصة: <span style="color:#ffd966;">بيكاس - BekEs</span></strong>
+        </div>
+        <div class="social-icons">
+            <a href="https://twitter.com/B6_7E" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.snapchat.com/add/b6_7E" target="_blank" rel="noopener noreferrer"><i class="fab fa-snapchat"></i></a>
+            <a href="https://t.me/B6_7E" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/B6_7E/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div style="margin-top: 0.5rem; font-size:0.75rem;">جميع حساباتي في السوشل ميديا موحدهـ B6_7E
+            <i class="fas fa-shield-alt"></i>  
+        </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // قائمة موسعة من الـ Proxies لحل مشكلة CORS
+        // بروكسيات متنوعة للسرعة
         const PROXIES = [
             "https://api.allorigins.win/raw?url=",
             "https://corsproxy.io/?",
-            "https://api.codetabs.com/v1/proxy?quest=",
-            "https://cors-anywhere.herokuapp.com/",
-            "https://proxy.cors.sh/",
-            "https://thingproxy.freeboard.io/fetch/"
+            "https://api.codetabs.com/v1/proxy?quest="
         ];
         
         let allTweaks = [];
-        let filteredTweaks = [];
         let selectedTweaks = new Set();
         
         const repoInput = document.getElementById('repoUrl');
@@ -416,334 +440,260 @@
             const toast = document.createElement('div');
             toast.className = 'toast';
             toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i> ${message}`;
-            toast.style.backgroundColor = isError ? '#e53e3e' : '#48bb78';
+            toast.style.backgroundColor = isError ? '#e53e3e' : '#2c5364';
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 4000);
         }
 
-        async function fetchWithRetry(url, maxRetries = 3) {
+        // دالة محسنة لتحميل الملفات الثنائية وضمان أنها .deb حقيقي
+        async function downloadDebFile(url, suggestedName) {
+            // تجربة جميع البروكسيات للحصول على الملف كـ ArrayBuffer
+            for (let proxy of PROXIES) {
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 25000);
+                    const proxyUrl = proxy + encodeURIComponent(url);
+                    const response = await fetch(proxyUrl, { 
+                        signal: controller.signal,
+                        headers: { 
+                            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X)',
+                            'Accept': 'application/octet-stream, application/vnd.debian.binary-package, */*'
+                        }
+                    });
+                    clearTimeout(timeoutId);
+                    
+                    if (response.ok) {
+                        // الحصول على البيانات كـ ArrayBuffer لضمان عدم فسادها
+                        const arrayBuffer = await response.arrayBuffer();
+                        
+                        // التحقق من أن الملف ليس نصي صغير (تجنب صفحات خطأ)
+                        if (arrayBuffer.byteLength < 100) {
+                            const textDecoder = new TextDecoder();
+                            const sample = textDecoder.decode(arrayBuffer.slice(0, 100));
+                            if (sample.includes('<!DOCTYPE') || sample.includes('<html') || sample.includes('error')) {
+                                continue; // جرب بروكسي آخر
+                            }
+                        }
+                        
+                        // التحقق من توقيع DEB (ar! magic)
+                        const uint8Array = new Uint8Array(arrayBuffer);
+                        const magic = String.fromCharCode(uint8Array[0], uint8Array[1], uint8Array[2]);
+                        if (magic !== '!<' && !(uint8Array[0] === 0x21 && uint8Array[1] === 0x3C && uint8Array[2] === 0x61)) {
+                            // قد لا يكون كل الـ DEBs يبدؤون بـ ar! بالضبط لكن معظمهم، نستمر
+                            console.log('تحذير: تنسيق الملف غير مؤكد، لكن سنحاول');
+                        }
+                        
+                        // إنشاء blob مع تحديد النوع الصحيح
+                        const blob = new Blob([arrayBuffer], { type: 'application/vnd.debian.binary-package' });
+                        
+                        // إنشاء رابط التحميل مع强制 الامتداد .deb
+                        const blobUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = blobUrl;
+                        // تنظيف الاسم وإضافة .deb قسراً
+                        let cleanName = suggestedName.replace(/[<>:"/\\|?*\.]/g, '_');
+                        if (!cleanName.endsWith('.deb')) {
+                            cleanName += '.deb';
+                        }
+                        a.download = cleanName;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(blobUrl);
+                        return true;
+                    }
+                } catch(e) {
+                    console.warn('Proxy failed:', proxy, e);
+                    continue;
+                }
+            }
+            throw new Error('فشل تحميل الملف من جميع البروكسيات');
+        }
+
+        async function fetchTextWithRetry(url, maxRetries = 2) {
             for (let retry = 0; retry < maxRetries; retry++) {
-                for (let proxyIndex = 0; proxyIndex < PROXIES.length; proxyIndex++) {
+                for (let proxy of PROXIES) {
                     try {
                         const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), 20000);
-                        let finalUrl = url;
-                        
-                        // استخدام proxy فقط إذا كان الرابط ليس بالفعل proxy
-                        if (!url.startsWith('blob:') && PROXIES[proxyIndex]) {
-                            finalUrl = PROXIES[proxyIndex] + encodeURIComponent(url);
-                        }
-                        
-                        const response = await fetch(finalUrl, { 
-                            signal: controller.signal,
-                            headers: { 
-                                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
-                                'Accept': 'text/plain, application/octet-stream, */*'
-                            }
-                        });
+                        const timeoutId = setTimeout(() => controller.abort(), 10000);
+                        const res = await fetch(proxy + encodeURIComponent(url), { signal: controller.signal });
                         clearTimeout(timeoutId);
-                        if (response.ok) {
-                            const text = await response.text();
-                            if (text && text.length > 0) {
-                                return text;
-                            }
+                        if (res.ok) {
+                            const text = await res.text();
+                            if (text && text.length > 200 && text.includes('Package:')) return text;
                         }
-                    } catch(e) {
-                        console.log(`Proxy ${proxyIndex} failed:`, e.message);
-                        continue;
-                    }
+                    } catch(e) {}
                 }
-                if (retry < maxRetries - 1) {
-                    await new Promise(r => setTimeout(r, 2000));
+                await new Promise(r => setTimeout(r, 500));
+            }
+            return null;
+        }
+
+        async function findPackagesFile(repoBase) {
+            const candidates = [
+                "/Packages", "/Packages.gz", "/Packages.bz2", "/Packages.xz",
+                "/dists/stable/main/binary-iphoneos-arm/Packages",
+                "/dists/stable/main/binary-iphoneos-arm/Packages.gz",
+                "/./Packages", "/./Packages.gz"
+            ];
+            for (let path of candidates) {
+                const url = repoBase + path;
+                const content = await fetchTextWithRetry(url, 1);
+                if (content) {
+                    let type = path.endsWith('.gz') ? 'gz' : 'text';
+                    return { content, type };
                 }
             }
             return null;
         }
 
-        // كشف نوع الحزمة (ARM64, ARM64e, rootful, rootless, roothide)
-        function detectPackageType(packageName, description, filename, version, architectureField, dependsField) {
-            const text = (packageName + " " + description + " " + filename + " " + version + " " + architectureField + " " + dependsField).toLowerCase();
-            const types = [];
-            
-            // كشف نوع المعالج
-            if (text.includes('arm64e')) {
-                types.push('ARM64e');
-            } else if (text.includes('arm64')) {
-                types.push('ARM64');
-            } else if (text.includes('armv7s')) {
-                types.push('ARMv7s');
-            } else if (text.includes('armv7')) {
-                types.push('ARMv7');
-            } else {
-                types.push('ARM64');
-            }
-            
-            // كشف نوع rootful/rootless/roothide
-            if (text.includes('roothide') || text.includes('hide')) {
-                types.push('roothide');
-            } else if (text.includes('rootless') || text.includes('root-less') || text.includes('root less')) {
-                types.push('rootless');
-            } else if (text.includes('rootful') || text.includes('root-full') || text.includes('root full')) {
-                types.push('rootful');
-            } else {
-                types.push('rootful');
-            }
-            
-            return types;
-        }
-
-        async function fetchPackagesContent(repoBase) {
-            // قائمة موسعة من المسارات المحتملة لملف Packages
-            const paths = [
-                "/Packages",
-                "/Packages.gz", 
-                "./Packages", 
-                "Packages",
-                "/Packages.bz2",
-                "/dists/stable/main/binary-iphoneos-arm/Packages",
-                "/dists/stable/main/binary-iphoneos-arm/Packages.gz",
-                "/dists/stable/main/binary-iphoneos-arm/Packages.bz2",
-                "/dists/main/binary-iphoneos-arm/Packages",
-                "/dists/main/binary-iphoneos-arm/Packages.gz",
-                "/dists/stable/main/binary-iphoneos-arm64/Packages",
-                "/dists/stable/main/binary-iphoneos-arm64/Packages.gz",
-                "./dists/stable/main/binary-iphoneos-arm/Packages",
-                "./dists/stable/main/binary-iphoneos-arm/Packages.gz",
-                "/./Packages",
-                "/./Packages.gz"
-            ];
-            
-            let lastError = null;
-            
-            for (let path of paths) {
+        async function decompressIfNeeded(content, type) {
+            if (type === 'gz') {
                 try {
-                    const url = repoBase + path;
-                    console.log(`محاولة جلب: ${url}`);
-                    let content = await fetchWithRetry(url);
-                    
-                    if (!content || content.length < 100) {
-                        console.log(`المحتوى قصير جداً أو فارغ من: ${path}`);
-                        continue;
-                    }
-                    
-                    // معالجة الملفات المضغوطة
-                    if (path.endsWith('.gz')) {
-                        try {
-                            // محاولة فك الضغط
-                            const binaryString = atob(content);
-                            const bytes = new Uint8Array(binaryString.length);
-                            for (let i = 0; i < binaryString.length; i++) {
-                                bytes[i] = binaryString.charCodeAt(i);
-                            }
-                            content = pako.inflate(bytes, { to: 'string' });
-                            console.log(`تم فك ضغط ${path} بنجاح`);
-                        } catch(e) {
-                            console.log(`فشل فك ضغط ${path}:`, e);
-                            continue;
-                        }
-                    } else if (path.endsWith('.bz2')) {
-                        // BZ2 ليس مدعوماً مباشرة، نتجاوزه
-                        console.log(`تخطي BZ2: ${path}`);
-                        continue;
-                    }
-                    
-                    // التحقق من صحة المحتوى
-                    if (content && content.includes("Package:") && (content.includes("Filename:") || content.includes("Filename:"))) {
-                        console.log(`تم العثور على Packages صالح في: ${path}`);
-                        return content;
-                    } else {
-                        console.log(`المحتوى من ${path} لا يحتوي على Package: و Filename: بشكل صحيح`);
-                    }
-                } catch(e) {
-                    console.log(`خطأ في المسار ${path}:`, e);
-                    lastError = e;
-                    continue;
-                }
+                    const binaryStr = atob(content);
+                    const bytes = new Uint8Array(binaryStr.length);
+                    for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+                    return pako.inflate(bytes, { to: 'string' });
+                } catch(e) { return content; }
             }
-            
-            // محاولة أخيرة: البحث عن أي ملف Packages في أي مكان
-            try {
-                const possibleUrls = [
-                    repoBase + "/Packages",
-                    repoBase + "/Packages.gz",
-                    repoBase.replace(/\/$/, "") + "/Packages",
-                    repoBase + "/./Packages"
-                ];
-                
-                for (let url of possibleUrls) {
-                    try {
-                        const content = await fetchWithRetry(url);
-                        if (content && content.length > 500 && content.includes("Package:")) {
-                            console.log(`تم العثور على Packages في المحاولة الأخيرة: ${url}`);
-                            return content;
-                        }
-                    } catch(e) {}
-                }
-            } catch(e) {}
-            
-            throw new Error(`لم يتم العثور على ملف Packages في المستودع: ${repoBase}\nتأكد من صحة الرابط وأن المستودع يدعم CORS`);
+            return content;
         }
 
-        function safeGetField(block, fieldName) {
-            const regex = new RegExp(`^${fieldName}:\\s*(.+)$`, 'm');
+        function safeGetField(block, field) {
+            const regex = new RegExp(`^${field}:\\s*(.+)$`, 'm');
             const match = block.match(regex);
-            return match && match[1] ? match[1].trim() : null;
+            return match ? match[1].trim() : null;
         }
 
-        function parsePackages(content, repoBase) {
-            const tweaksMap = new Map();
-            
-            // تقسيم المحتوى إلى كتل
-            let blocks = [];
-            if (content.includes('\n\n')) {
-                blocks = content.split(/\n\s*\n/);
-            } else {
-                blocks = content.split(/\n(?=Package:)/);
-            }
-            
-            console.log(`تم العثور على ${blocks.length} كتلة للمعالجة`);
-            
+        function detectTypes(pkgName, desc, filename, arch, depends) {
+            const text = (pkgName + " " + desc + " " + filename + " " + arch + " " + depends).toLowerCase();
+            let archType = 'ARM64';
+            if (text.includes('arm64e') || text.includes('arm64e')) archType = 'ARM64e';
+            let mode = 'rootful';
+            if (text.includes('roothide')) mode = 'roothide';
+            else if (text.includes('rootless')) mode = 'rootless';
+            return [archType, mode];
+        }
+
+        function parsePackages(content, baseUrl) {
+            const packagesMap = new Map();
+            let blocks = content.split(/\n\s*\n/);
             for (let block of blocks) {
-                if (!block || !block.trim()) continue;
                 if (!block.includes("Package:")) continue;
-                
-                try {
-                    const packageName = safeGetField(block, "Package");
-                    const version = safeGetField(block, "Version") || "1.0";
-                    let description = safeGetField(block, "Description") || "لا يوجد وصف متاح";
-                    const author = safeGetField(block, "Author") || safeGetField(block, "Maintainer") || "مطور المستودع";
-                    let filename = safeGetField(block, "Filename");
-                    const architecture = safeGetField(block, "Architecture") || "";
-                    const depends = safeGetField(block, "Depends") || "";
-                    
-                    if (!packageName) continue;
-                    if (!filename) {
-                        console.log(`الحزمة ${packageName} ليس لديها Filename، يتم تخطيها`);
-                        continue;
-                    }
-                    
-                    // كشف جميع أنواع الحزمة
-                    const packageTypes = detectPackageType(packageName, description, filename, version, architecture, depends);
-                    
-                    if (description && description.length > 200) {
-                        description = description.substring(0, 197) + "...";
-                    }
-                    
-                    let downloadUrl = "";
-                    if (filename.startsWith("http://") || filename.startsWith("https://")) {
-                        downloadUrl = filename;
-                    } else {
-                        let base = repoBase;
-                        if (!base.endsWith("/")) base += "/";
-                        if (filename.startsWith("./")) filename = filename.substring(2);
-                        if (filename.startsWith("/")) filename = filename.substring(1);
-                        downloadUrl = base + filename;
-                    }
-                    
-                    const key = packageName.toLowerCase() + "_" + version;
-                    if (!tweaksMap.has(key)) {
-                        tweaksMap.set(key, {
-                            id: packageName + "_" + version,
-                            name: packageName,
-                            version: version,
-                            description: description || "لا يوجد وصف",
-                            author: author,
-                            downloadUrl: downloadUrl,
-                            filename: filename.split('/').pop() || filename,
-                            types: packageTypes,
-                            architecture: architecture
-                        });
-                    }
-                } catch(e) {
-                    console.log("خطأ في معالجة كتلة:", e);
-                    continue;
+                const pkg = safeGetField(block, "Package");
+                const vers = safeGetField(block, "Version") || "1.0";
+                let desc = safeGetField(block, "Description") || "وصف غير متوفر";
+                const author = safeGetField(block, "Author") || safeGetField(block, "Maintainer") || "المستودع";
+                let filename = safeGetField(block, "Filename");
+                const archField = safeGetField(block, "Architecture") || "";
+                const depends = safeGetField(block, "Depends") || "";
+                if (!pkg || !filename) continue;
+                if (desc.length > 200) desc = desc.substr(0, 197) + "...";
+                let downloadUrl = filename.startsWith("http") ? filename : baseUrl.replace(/\/$/, '') + '/' + filename.replace(/^\.?\//, '');
+                const types = detectTypes(pkg, desc, filename, archField, depends);
+                const key = pkg + "_" + vers;
+                if (!packagesMap.has(key)) {
+                    packagesMap.set(key, {
+                        id: key,
+                        name: pkg,
+                        version: vers,
+                        description: desc,
+                        author: author,
+                        downloadUrl: downloadUrl,
+                        filename: filename.split('/').pop() || pkg + ".deb",
+                        types: types,
+                        architecture: archField
+                    });
                 }
             }
-            
-            const result = Array.from(tweaksMap.values());
-            console.log(`تم استخراج ${result.length} حزمة بنجاح`);
-            return result;
+            return Array.from(packagesMap.values());
+        }
+
+        async function fetchDirectDebsFromIndex(repoBase) {
+            const possibleDirs = ["/debs/", "/deb/", "/Debs/", "/packages/"];
+            let found = [];
+            for (let dir of possibleDirs) {
+                try {
+                    const url = repoBase + dir;
+                    const html = await fetchTextWithRetry(url, 1);
+                    if (html && html.includes('.deb')) {
+                        const regex = /href="([^"]*\.deb)"/gi;
+                        let match;
+                        while ((match = regex.exec(html)) !== null) {
+                            if (match[1]) {
+                                let debUrl = repoBase + dir + match[1];
+                                found.push({
+                                    id: match[1],
+                                    name: match[1].replace(/\.deb$/i, ''),
+                                    version: "1.0",
+                                    description: "تم الجلب المباشر من المستودع",
+                                    author: "مستودع خارجي",
+                                    downloadUrl: debUrl,
+                                    filename: match[1],
+                                    types: ['ARM64', 'rootful'],
+                                });
+                            }
+                        }
+                    }
+                } catch(e) {}
+            }
+            return found;
         }
 
         function updateUI() {
-            filteredTweaks = allTweaks.slice();
-            
-            if (filteredTweaks.length === 0) {
-                tweaksGrid.innerHTML = `<div class="no-results"><i class="fas fa-box-open" style="font-size: 3rem;"></i><h3>⚠️ لا توجد حزم DEB</h3><p>لم يتم العثور على حزم في هذا المستودع</p><p style="margin-top: 0.5rem;">💡 تأكد من أن المستودع يحتوي على حزم .deb</p></div>`;
+            if (allTweaks.length === 0) {
+                tweaksGrid.innerHTML = `<div class="no-results"><i class="fas fa-box-open fa-3x"></i><h3>⚠️ لا توجد حزم DEB</h3><p>لم يتم العثور على حزم في هذا المستودع</p></div>`;
                 statsDiv.style.display = "flex";
-                countDisplay.innerHTML = `0 حزمة`;
-                typeDisplay.innerHTML = `لا توجد حزم`;
+                countDisplay.innerText = "0 حزمة";
+                typeDisplay.innerText = "بدون حزم";
                 bulkActions.style.display = "none";
                 return;
             }
-            
             statsDiv.style.display = "flex";
             bulkActions.style.display = "flex";
-            countDisplay.innerHTML = `${filteredTweaks.length} حزمة`;
-            
-            const typeStats = { ARM64: 0, ARM64e: 0, rootful: 0, rootless: 0, roothide: 0 };
-            filteredTweaks.forEach(tweak => {
-                tweak.types.forEach(type => {
-                    if (typeStats[type] !== undefined) typeStats[type]++;
-                });
+            countDisplay.innerText = `${allTweaks.length} حزمة`;
+            let stats = { ARM64:0, ARM64e:0, rootful:0, rootless:0, roothide:0 };
+            allTweaks.forEach(t => {
+                t.types.forEach(ty => { if(stats[ty] !== undefined) stats[ty]++; });
             });
-            typeDisplay.innerHTML = `ARM64:${typeStats.ARM64} | ARM64e:${typeStats.ARM64e} | rootful:${typeStats.rootful} | rootless:${typeStats.rootless} | roothide:${typeStats.roothide}`;
+            typeDisplay.innerText = `🔹 ARM64:${stats.ARM64} | ARM64e:${stats.ARM64e} | rootful:${stats.rootful} | rootless:${stats.rootless} | roothide:${stats.roothide}`;
             
             selectedTweaks.clear();
-            
             const fragment = document.createDocumentFragment();
             tweaksGrid.innerHTML = "";
-            
-            for (let i = 0; i < filteredTweaks.length; i++) {
-                const tweak = filteredTweaks[i];
+            for (let t of allTweaks) {
                 const card = document.createElement('div');
                 card.className = 'tweak-card';
-                
-                let badgesHtml = '<div class="type-badges">';
-                tweak.types.forEach(type => {
-                    let badgeClass = '';
-                    if (type === 'ARM64') badgeClass = 'badge-arm64';
-                    else if (type === 'ARM64e') badgeClass = 'badge-arm64e';
-                    else if (type === 'rootful') badgeClass = 'badge-rootful';
-                    else if (type === 'rootless') badgeClass = 'badge-rootless';
-                    else if (type === 'roothide') badgeClass = 'badge-roothide';
-                    else badgeClass = 'badge-arm64';
-                    
-                    let icon = '';
-                    if (type === 'ARM64' || type === 'ARM64e') icon = '<i class="fas fa-microchip"></i>';
-                    else if (type === 'rootful') icon = '<i class="fas fa-check-circle"></i>';
-                    else if (type === 'rootless') icon = '<i class="fas fa-leaf"></i>';
-                    else if (type === 'roothide') icon = '<i class="fas fa-shield-alt"></i>';
-                    
-                    badgesHtml += `<span class="type-badge ${badgeClass}">${icon} ${type}</span>`;
+                let badges = '<div class="type-badges">';
+                t.types.forEach(ty => {
+                    let cls = '';
+                    if (ty === 'ARM64') cls='badge-arm64';
+                    else if (ty === 'ARM64e') cls='badge-arm64e';
+                    else if (ty === 'rootful') cls='badge-rootful';
+                    else if (ty === 'rootless') cls='badge-rootless';
+                    else cls='badge-roothide';
+                    let icon = ty.includes('ARM') ? '<i class="fas fa-microchip"></i>' : (ty === 'rootless' ? '<i class="fas fa-leaf"></i>' : '<i class="fas fa-shield-alt"></i>');
+                    badges += `<span class="type-badge ${cls}">${icon} ${ty}</span>`;
                 });
-                badgesHtml += '</div>';
-                
+                badges += '</div>';
                 card.innerHTML = `
                     <div class="checkbox-wrapper">
-                        <input type="checkbox" class="tweak-checkbox" data-id="${escapeHtml(tweak.id)}" id="chk_${escapeHtml(tweak.id)}">
+                        <input type="checkbox" class="tweak-checkbox" data-id="${escapeHtml(t.id)}" id="chk_${escapeHtml(t.id)}">
                     </div>
                     <div class="card-header">
                         <div class="icon-bg"><i class="fas fa-cube"></i></div>
                         <div class="card-header-info">
-                            <div class="tweak-title">${escapeHtml(tweak.name)}</div>
-                            <div>
-                                <span class="tweak-version">${escapeHtml(tweak.version)}</span>
-                            </div>
-                            ${badgesHtml}
+                            <div class="tweak-title">${escapeHtml(t.name)}</div>
+                            <div><span class="tweak-version">${escapeHtml(t.version)}</span></div>
+                            ${badges}
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="tweak-desc">${escapeHtml(tweak.description)}</p>
-                        <div class="tweak-meta">
-                            <span><i class="fas fa-user"></i> ${escapeHtml(tweak.author.substring(0, 50))}</span>
-                            <span><i class="fas fa-file"></i> ${escapeHtml(tweak.filename.substring(0, 30))}</span>
-                        </div>
+                        <p class="tweak-desc">${escapeHtml(t.description)}</p>
+                        <div class="tweak-meta"><span><i class="fas fa-user"></i> ${escapeHtml(t.author.substring(0,45))}</span><span><i class="fas fa-file"></i> ${escapeHtml(t.filename.substring(0,30))}</span></div>
                     </div>
                     <div class="card-footer">
-                        <button class="download-single-btn" data-url="${escapeHtml(tweak.downloadUrl)}" data-name="${escapeHtml(tweak.name)}">
-                            <i class="fas fa-download"></i> تحميل DEB
-                        </button>
+                        <button class="download-single-btn" data-url="${escapeHtml(t.downloadUrl)}" data-name="${escapeHtml(t.name)}"><i class="fas fa-download"></i> تحميل DEB</button>
                         <span class="file-badge"><i class="fas fa-archive"></i> .deb</span>
                     </div>
                 `;
@@ -751,11 +701,11 @@
             }
             tweaksGrid.appendChild(fragment);
             
-            document.querySelectorAll('.tweak-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('change', (e) => {
-                    const id = checkbox.getAttribute('data-id');
-                    if (checkbox.checked && id) selectedTweaks.add(id);
-                    else if (id) selectedTweaks.delete(id);
+            document.querySelectorAll('.tweak-checkbox').forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    const id = cb.getAttribute('data-id');
+                    if (cb.checked) selectedTweaks.add(id);
+                    else selectedTweaks.delete(id);
                     updateSelectedUI();
                 });
             });
@@ -765,292 +715,151 @@
                     e.preventDefault();
                     const url = btn.getAttribute('data-url');
                     const name = btn.getAttribute('data-name');
-                    if (url && url !== '#') {
-                        btn.disabled = true;
-                        btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري...';
-                        await downloadSingleFile(url, name);
+                    if (!url) { showToast('رابط غير صالح', true); return; }
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري التحميل...';
+                    try {
+                        await downloadDebFile(url, name);
+                        showToast(`✅ تم تحميل ${name}.deb بنجاح`);
+                    } catch(err) {
+                        showToast(`❌ فشل تحميل ${name}`, true);
+                    } finally {
                         btn.disabled = false;
                         btn.innerHTML = '<i class="fas fa-download"></i> تحميل DEB';
-                    } else {
-                        showToast('رابط التحميل غير متوفر', true);
                     }
                 });
             });
-            
             updateSelectedUI();
         }
-        
-        async function downloadSingleFile(url, name) {
-            showToast(`جاري تحميل ${name}.deb...`);
-            try {
-                const blob = await fetchBinaryFile(url);
-                if (blob && blob.size > 0) {
-                    const downloadUrl = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = downloadUrl;
-                    a.download = `${name}.deb`.replace(/[<>:"/\\|?*]/g, '_');
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(downloadUrl);
-                    showToast(`تم تحميل ${name}.deb بنجاح`);
-                } else {
-                    throw new Error('الملف تالف');
+
+        function updateSelectedUI() {
+            const cnt = selectedTweaks.size;
+            selectedCountSpan.innerHTML = `<i class="fas fa-check-circle"></i> ${cnt} محدد`;
+            downloadAllBtn.disabled = cnt === 0;
+        }
+
+        async function downloadSelectedZip() {
+            if (selectedTweaks.size === 0) { showToast('حدد حزمة واحدة على الأقل', true); return; }
+            const selectedItems = allTweaks.filter(t => selectedTweaks.has(t.id));
+            const zip = new JSZip();
+            let completed = 0, failed = 0, active = 0;
+            const total = selectedItems.length;
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            progressBar.innerText = '0%';
+            speedInfo.innerText = 'بدء التحميل السريع...';
+            const startTime = Date.now();
+            const queue = [...selectedItems];
+            const maxConcurrent = 5;
+            
+            async function worker() {
+                while(queue.length) {
+                    const item = queue.shift();
+                    if (!item) break;
+                    active++;
+                    try {
+                        // استخدام نفس دالة التحميل الآمنة
+                        const arrayBuffer = await downloadDebFileRaw(item.downloadUrl);
+                        if(arrayBuffer && arrayBuffer.byteLength > 0) {
+                            const safeName = item.name.replace(/[<>:"/\\|?*]/g, '_');
+                            const ver = item.version.replace(/[\\/:*?"<>|]/g, '_');
+                            zip.file(`${safeName}_${ver}_${item.types.join('-')}.deb`, arrayBuffer);
+                            completed++;
+                        } else failed++;
+                    } catch(e) { failed++; }
+                    active--;
+                    const percent = (completed / total) * 100;
+                    progressBar.style.width = `${percent}%`;
+                    progressBar.innerText = `${Math.round(percent)}%`;
+                    const elapsed = (Date.now() - startTime) / 1000;
+                    const speed = elapsed > 0 ? (completed / elapsed).toFixed(1) : 0;
+                    speedInfo.innerHTML = `⚡ ${speed} ملف/ثانية | ✓ ${completed} / ${total}`;
+                    detailedProgress.innerHTML = `✅ ${completed} تم | ❌ ${failed} فشل | 🔄 ${active} جارٍ`;
                 }
-            } catch(e) {
-                showToast(`فشل تحميل ${name}`, true);
             }
+            
+            const workers = [];
+            for (let i=0; i<Math.min(maxConcurrent, total); i++) workers.push(worker());
+            await Promise.all(workers);
+            if (completed > 0) {
+                const zipBlob = await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 1 } });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(zipBlob);
+                link.download = `debs_pack_${Date.now()}.zip`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+                showToast(`تم تحميل ${completed} حزمة DEB بنجاح كملف ZIP`);
+            } else showToast('فشل تحميل جميع الحزم', true);
+            setTimeout(() => { progressContainer.style.display = 'none'; }, 4000);
         }
         
-        async function fetchBinaryFile(url, timeout = 30000) {
-            for (let proxyIndex = 0; proxyIndex < PROXIES.length; proxyIndex++) {
+        async function downloadDebFileRaw(url) {
+            for (let proxy of PROXIES) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), timeout);
-                    const proxyUrl = PROXIES[proxyIndex] + encodeURIComponent(url);
-                    const response = await fetch(proxyUrl, { 
-                        signal: controller.signal,
-                        headers: { 
-                            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1'
-                        }
-                    });
+                    const timeoutId = setTimeout(() => controller.abort(), 20000);
+                    const proxyUrl = proxy + encodeURIComponent(url);
+                    const response = await fetch(proxyUrl, { signal: controller.signal });
                     clearTimeout(timeoutId);
                     if (response.ok) {
-                        const blob = await response.blob();
-                        if (blob && blob.size > 0) return blob;
+                        const buffer = await response.arrayBuffer();
+                        if (buffer.byteLength > 1000) return buffer;
                     }
                 } catch(e) { continue; }
             }
             throw new Error('فشل التحميل');
         }
 
-        function updateSelectedUI() {
-            const count = selectedTweaks.size;
-            selectedCountSpan.innerHTML = `<i class="fas fa-check-circle"></i> ${count} محدد`;
-            downloadAllBtn.disabled = count === 0;
-            downloadAllBtn.style.opacity = count === 0 ? '0.6' : '1';
-            
-            document.querySelectorAll('.tweak-checkbox').forEach(checkbox => {
-                const id = checkbox.getAttribute('data-id');
-                if (id && selectedTweaks.has(id)) checkbox.checked = true;
-                else if (checkbox) checkbox.checked = false;
-            });
-        }
-
-        function selectAllTweaks() {
-            if (!filteredTweaks.length) return;
-            
-            if (selectedTweaks.size === filteredTweaks.length) {
-                selectedTweaks.clear();
-                showToast('تم إلغاء تحديد الكل');
-            } else {
-                filteredTweaks.forEach(tweak => selectedTweaks.add(tweak.id));
-                showToast(`تم تحديد ${filteredTweaks.length} حزمة`);
-            }
-            updateSelectedUI();
-        }
-
-        async function downloadSelectedAsZip() {
-            if (selectedTweaks.size === 0) {
-                showToast('الرجاء تحديد الحزم أولاً', true);
-                return;
-            }
-            
-            const selected = filteredTweaks.filter(tweak => selectedTweaks.has(tweak.id));
-            if (selected.length === 0) {
-                showToast('لا توجد حزم محددة صالحة', true);
-                return;
-            }
-            
-            showToast(`بدء تحميل ${selected.length} حزمة...`);
-            
-            const zip = new JSZip();
-            let completed = 0;
-            let failed = [];
-            let startTime = Date.now();
-            let activeDownloads = 0;
-            const maxConcurrent = 5;
-            
-            progressContainer.style.display = 'block';
-            progressBar.style.width = '0%';
-            progressBar.innerHTML = '0%';
-            speedInfo.innerHTML = 'جاري تحميل الملفات...';
-            detailedProgress.innerHTML = `0 / ${selected.length} ملف`;
-            
-            const queue = [...selected];
-            
-            async function downloadOne(tweak) {
-                for (let attempt = 1; attempt <= 3; attempt++) {
-                    try {
-                        const blob = await fetchBinaryFile(tweak.downloadUrl, 30000);
-                        if (blob && blob.size > 0) {
-                            const safeName = tweak.name.replace(/[<>:"/\\|?*]/g, '_');
-                            const typeStr = tweak.types.join('_');
-                            zip.file(`${safeName}_${tweak.version}_${typeStr}.deb`, blob);
-                            return true;
-                        }
-                        if (attempt < 3) await new Promise(r => setTimeout(r, 2000));
-                    } catch(e) {
-                        if (attempt === 3) throw e;
-                        await new Promise(r => setTimeout(r, 2000));
-                    }
-                }
-                return false;
-            }
-            
-            async function worker() {
-                while (queue.length > 0) {
-                    const tweak = queue.shift();
-                    if (!tweak) continue;
-                    
-                    activeDownloads++;
-                    updateProgress();
-                    
-                    try {
-                        const success = await downloadOne(tweak);
-                        if (success) completed++;
-                        else failed.push(tweak.name);
-                    } catch(e) {
-                        failed.push(tweak.name);
-                    }
-                    
-                    activeDownloads--;
-                    updateProgress();
-                }
-            }
-            
-            function updateProgress() {
-                const percent = (completed / selected.length) * 100;
-                progressBar.style.width = `${percent}%`;
-                progressBar.innerHTML = `${Math.round(percent)}%`;
-                detailedProgress.innerHTML = `✅ ${completed}/${selected.length} | 🔄 ${activeDownloads} جاري`;
-                const elapsed = (Date.now() - startTime) / 1000;
-                if (elapsed > 0) {
-                    const speed = Math.round((completed / elapsed) * 10);
-                    speedInfo.innerHTML = `⚡ ${speed}/ثانية - ${Math.round(speed * 0.1)}KB/s`;
-                }
-            }
-            
-            const workers = [];
-            for (let i = 0; i < Math.min(maxConcurrent, selected.length); i++) {
-                workers.push(worker());
-            }
-            
-            await Promise.all(workers);
-            
-            progressBar.style.width = '100%';
-            progressBar.innerHTML = '100%';
-            speedInfo.innerHTML = '✨ جاري إنشاء ZIP...';
-            
-            if (completed > 0) {
-                try {
-                    const content = await zip.generateAsync({ 
-                        type: "blob",
-                        compression: "DEFLATE",
-                        compressionOptions: { level: 1 }
-                    });
-                    
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(content);
-                    link.download = `all_debs_${Date.now()}.zip`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(link.href);
-                    
-                    const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
-                    detailedProgress.innerHTML = `✅ اكتمل! ${completed} ملف في ${totalTime} ثانية`;
-                    showToast(`✅ تم تحميل ${completed} حزمة DEB بنجاح`);
-                    if (failed.length > 0) {
-                        showToast(`⚠️ فشل تحميل ${failed.length} حزمة`, true);
-                    }
-                } catch(e) {
-                    showToast('حدث خطأ أثناء إنشاء ZIP', true);
-                }
-            } else {
-                detailedProgress.innerHTML = '❌ فشل التحميل';
-                showToast('❌ فشل تحميل الملفات', true);
-            }
-            
-            setTimeout(() => {
-                progressContainer.style.display = 'none';
-            }, 5000);
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return String(str).replace(/[&<>]/g, (m) => {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-        
-        async function fetchTweaks() {
-            let repoUrl = repoInput.value.trim();
-            if (!repoUrl) {
-                showToast('الرجاء إدخال رابط المستودع', true);
-                return;
-            }
-            
-            if (!repoUrl.startsWith('http://') && !repoUrl.startsWith('https://')) {
-                repoUrl = 'https://' + repoUrl;
-            }
-            if (repoUrl.endsWith('/')) {
-                repoUrl = repoUrl.slice(0, -1);
-            }
-            
+        async function fetchAllTweaks() {
+            let repo = repoInput.value.trim();
+            if (!repo) { showToast('أدخل رابط المستودع', true); return; }
+            if (!repo.startsWith('http')) repo = 'https://' + repo;
+            repo = repo.replace(/\/$/, '');
             fetchBtn.disabled = true;
-            fetchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جاري الجلب...';
-            tweaksGrid.innerHTML = `<div class="loading"><div class="spinner"></div><h3>🔍 جلب جميع حزم DEB...</h3><p>جاري البحث عن ملف Packages في المستودع</p><p style="margin-top: 0.5rem; font-size: 0.8rem;">⏳ يتم تجربة عدة مسارات...</p></div>`;
-            statsDiv.style.display = 'none';
-            bulkActions.style.display = 'none';
-            
+            fetchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> جلب سريع...';
+            tweaksGrid.innerHTML = `<div class="loading"><div class="spinner"></div><h3>⚡ جلب جميع DEBs بسرعه فائقة</h3><p>جاري البحث في Packages و debs ...</p></div>`;
             try {
-                const packagesContent = await fetchPackagesContent(repoUrl);
-                if (!packagesContent || packagesContent.length < 100) {
-                    throw new Error('لم يتم العثور على محتوى صالح لملف Packages');
+                const pkgRes = await findPackagesFile(repo);
+                let tweaksFromPkg = [];
+                if (pkgRes && pkgRes.content) {
+                    const decomp = await decompressIfNeeded(pkgRes.content, pkgRes.type);
+                    tweaksFromPkg = parsePackages(decomp, repo);
                 }
-                
-                allTweaks = parsePackages(packagesContent, repoUrl);
-                
-                if (!allTweaks || allTweaks.length === 0) {
-                    throw new Error('لا توجد حزم deb في هذا المستودع');
+                const directDebs = await fetchDirectDebsFromIndex(repo);
+                let combined = [...tweaksFromPkg, ...directDebs];
+                const unique = new Map();
+                for (let t of combined) {
+                    const key = t.name.toLowerCase();
+                    if (!unique.has(key) || unique.get(key).version < t.version) unique.set(key, t);
                 }
-                
+                allTweaks = Array.from(unique.values());
+                if (allTweaks.length === 0) throw new Error('لم نجد أي حزمة DEB');
                 updateUI();
-                
-                showToast(`✅ تم جلب ${allTweaks.length} حزمة DEB بنجاح`);
-                
-            } catch (error) {
-                console.error('Fetch error:', error);
-                tweaksGrid.innerHTML = `
-                    <div class="error">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e53e3e;"></i>
-                        <h3>❌ حدث خطأ أثناء الجلب</h3>
-                        <p>${escapeHtml(error.message)}</p>
-                        <p style="margin-top: 1rem;">💡 نصائح للحل:</p>
-                        <ul style="text-align: right; margin-top: 0.5rem;">
-                            <li>تأكد من صحة رابط المستودع (مثال: https://apt.procurs.us)</li>
-                            <li>تأكد من أن المستودع يدعم CORS أو استخدم رابط مختلف</li>
-                            <li>جرب مستودع آخر للتأكد من أن المشكلة ليست من المستودع</li>
-                        </ul>
-                    </div>
-                `;
-                showToast(error.message, true);
+                showToast(`✨ تم جلب ${allTweaks.length} حزمة DEB بنجاح`);
+            } catch (err) {
+                tweaksGrid.innerHTML = `<div class="error"><i class="fas fa-skull-crosswalk fa-3x"></i><h3>خطأ</h3><p>${err.message}</p><p>تأكد من صحة المستودع واتصال الإنترنت.</p></div>`;
+                showToast(err.message, true);
             } finally {
                 fetchBtn.disabled = false;
-                fetchBtn.innerHTML = '<i class="fas fa-download"></i> جلب جميع DEBs';
+                fetchBtn.innerHTML = '<i class="fas fa-rocket"></i> جلب جميع DEBs';
             }
         }
+
+        function escapeHtml(str) { return String(str).replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
         
-        fetchBtn.addEventListener('click', fetchTweaks);
-        selectAllBtn.addEventListener('click', selectAllTweaks);
-        downloadAllBtn.addEventListener('click', downloadSelectedAsZip);
-        repoInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') fetchTweaks(); });
-        
-        showToast('✨ جلب جميع DEBs: ARM64, ARM64e, rootful, rootless, roothide', false);
+        fetchBtn.addEventListener('click', fetchAllTweaks);
+        selectAllBtn.addEventListener('click', () => {
+            if (selectedTweaks.size === allTweaks.length) selectedTweaks.clear();
+            else allTweaks.forEach(t => selectedTweaks.add(t.id));
+            updateSelectedUI();
+            document.querySelectorAll('.tweak-checkbox').forEach(cb => { const id = cb.getAttribute('data-id'); cb.checked = selectedTweaks.has(id); });
+            showToast(selectedTweaks.size === allTweaks.length ? 'تم تحديد الكل' : 'تم إلغاء التحديد');
+        });
+        downloadAllBtn.addEventListener('click', downloadSelectedZip);
+        repoInput.addEventListener('keypress', e => { if(e.key === 'Enter') fetchAllTweaks(); });
+        showToast('   ', false);
     })();
 </script>
 </body>
